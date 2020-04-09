@@ -1,0 +1,65 @@
+/* Desktop first */
+
+.NavBarContainer{
+    width: 100%;
+}
+
+.NavIcon{
+    width: auto !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    cursor: pointer;
+    font-size: 1.1rem !important;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    height: 64px;
+    
+}
+
+.Options{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Logo{
+    width: 20%;
+}
+
+.Active{
+    border-bottom: 3px solid #fff;
+    border-top: 3px solid #fff;
+}
+
+.Active:hover{
+    transform: scale(1) !important;
+}
+
+
+.NavIcon:hover{
+    transform: scale(1.1);
+}
+
+.MuiPaper-root{
+    width: 80%;
+}
+
+.DraweMainDiv{
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+   
+}
+
+@media only screen and (max-width: 960px) {
+    
+}
+
+@media only screen and (max-width: 1280px) {
+   
+}
+
+
