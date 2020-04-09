@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { LocatecContext, LocatecData } from './Context/LocatecContext';
 import './Style/Global.css'
 
@@ -8,6 +8,11 @@ import './Style/Global.css'
 const Home = (
   lazy(() => (
     import('./Components/Home')
+  ))
+)
+const Catalog = (
+  lazy(() => (
+    import('./Components/Catalog')
   ))
 )
 
@@ -38,9 +43,13 @@ class App extends React.Component{
           <Suspense fallback={<div>Loading...</div>}>
             <Router>
               <Switch>
-                <Route exactpath="/Home">
+                <Route path="/Home">
                   <Home/>
                 </Route>
+                <Route path="/Catalog">
+                  <Catalog/>
+                </Route>
+                <Redirect to="/Home"/>
               </Switch>
             </Router>
           </Suspense>
