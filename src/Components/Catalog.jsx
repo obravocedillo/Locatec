@@ -29,7 +29,7 @@ class Catalog extends Component{
   render() {
     return (
         <Grid container>
-            <NavBar></NavBar>
+            <NavBar active="Catalog"></NavBar>
             <Grid container spacing={2}>
                 <Grid item xl={1}>
                 </Grid>
