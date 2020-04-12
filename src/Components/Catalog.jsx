@@ -36,7 +36,6 @@ class Catalog extends Component{
                 <Grid container spacing={2} xl={11}>
                     <Grid item>
                         <OrderObjects>
-
                         </OrderObjects>
                     </Grid>
                     <Grid item>
