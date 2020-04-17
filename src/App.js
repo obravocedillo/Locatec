@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { LocatecContext, LocatecData } from './Context/LocatecContext';
 import './Style/Global.css'
+import RegisterObject from './Components/RegisterObject';
 
 
 
@@ -48,6 +49,9 @@ class App extends React.Component{
                 </Route>
                 <Route path="/Catalog">
                   <Catalog/>
+                </Route>
+                <Route path="/Register">
+                  <RegisterObject />
                 </Route>
                 <Redirect to="/Home"/>
               </Switch>
