@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -17,9 +18,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+export default function ObjectCard(props) {
   const classes = useStyles();
-
+  console.log(props);
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -30,17 +31,25 @@ export default function MediaCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Objeto Perdido
+            {props.data.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Pequeña descripción del objeto para mayor información al usuario.
+            Fecha perdido: {props.data.fecha_perdida}
+            <br/> 
+            Lugar perdido: {props.place.name}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Ver más
-        </Button>
+        <Link to={{
+                  pathname: "/Details",
+                  data: props.data,
+                  place: props.place
+              }}>
+          <Button size="small" color="primary">
+            Ver más
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

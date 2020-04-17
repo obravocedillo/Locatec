@@ -12,7 +12,8 @@ const useStyles = makeStyles({
     }
   });
 
-export default function ProductDescription() {
+export default function ProductDescription(props) {
+    console.log(props)
     const classes=useStyles();
     return (
         <Card>
@@ -36,22 +37,22 @@ export default function ProductDescription() {
                                     <br/>
                                     <br/>
                                     <Typography align="center" variant="h3">
-                                    Aquí iría el título 
+                                    {props.data.name}
                                     </Typography>
                                     <br/>
                                     <Divider>
                                     </Divider>
                                     <br/>
                                     <Typography paragraph={true}>
-                                    Aquí iría una descripción disque chingona del producto 
+                                    Encontrado por: {props.data.encontrado_por}  
                                     </Typography>
                                     <br/>
                                     <Divider>
                                     </Divider>
                                     <br/> 
                                     
-                                    <Typography>Lugar: Tec Campus GDA</Typography>
-                                    <Typography>Fecha: 12/12/2012</Typography>
+                                    <Typography>Lugar: {props.place.name}</Typography>
+                                    <Typography>Fecha: {props.data.fecha_perdida} </Typography>
                                     <br/>
                                     <Button variant="outlined" color="primary" size="large">Reclamar</Button>
                                 </Grid>
