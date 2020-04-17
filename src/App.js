@@ -15,6 +15,11 @@ const Catalog = (
     import('./Components/Catalog')
   ))
 )
+const Details = (
+  lazy(() => (
+    import('./Components/Details')
+  ))
+)
 
 class App extends React.Component{
   constructor(props){
@@ -48,6 +53,9 @@ class App extends React.Component{
                 </Route>
                 <Route path="/Catalog">
                   <Catalog/>
+                </Route>
+                <Route path="/Details">
+                  <Details/>
                 </Route>
                 <Redirect to="/Home"/>
               </Switch>
