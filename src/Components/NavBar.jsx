@@ -13,28 +13,34 @@ import HomeIcon from '@material-ui/icons/Home';
 import ListIcon from '@material-ui/icons/List';
 import CreateIcon from '@material-ui/icons/Create';
 import { Hidden, Typography } from '@material-ui/core';
+import { withRouter } from "react-router-dom";
 
 
 class NavBar extends Component{ 
   constructor(props){
     super(props);
     this.state = {
-        drawerIsOpen: false
+        drawerIsOpen: false,
     };
+  }
+
+  navigateTo = (route) => {
+    console.log(route)
+    this.props.history.push(route)
   }
 
   openMobile = () => {
     this.setState({ drawerIsOpen: true });
   };
 
-  onClose= ()=>{
+  onClose= () => {
     this.setState({ drawerIsOpen: false });
   }
 
-  onOpen = ()=>{
+  onOpen = () => {
     this.setState({ drawerIsOpen: true });
-  } 
-
+  }
+  
   componentDidMount() {
   }
 
@@ -51,13 +57,13 @@ class NavBar extends Component{
                     <h2 className="Logo">Locatec</h2>
                     <Hidden smDown >
                         <div className="Options">
-                            <Typography variant="h6" className="NavIcon Active First">
+                            <Typography variant="h6" className={"NavIcon First" + (this.props.active === 'Home' ? ' Active' : '')} onClick={()=>this.navigateTo("/Home")}>
                                 Inicio
                             </Typography>
-                            <Typography variant="h6" className="NavIcon">
+                            <Typography variant="h6" className={"NavIcon" + (this.props.active === 'Catalog' ? ' Active' : '')} onClick={()=>this.navigateTo("/Catalog")}>
                                 Catálogo de objetos
                             </Typography>
-                            <Typography variant="h6" className="NavIcon Last">
+                            <Typography variant="h6" className={"NavIcon Last" + (this.props.active === 'Register' ? ' Active' : '')} onClick={()=>this.navigateTo("/Register")}>
                                 Registro de objeto
                             </Typography>
                         </div>
@@ -100,4 +106,4 @@ class NavBar extends Component{
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

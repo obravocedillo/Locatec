@@ -1,0 +1,50 @@
+.CatalogMainContainer{
+    justify-content: center !important;
+}
+
+.CardContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem !important;
+}
+
+.FilterContainer{
+    padding-left: 24px;
+}
+
+.CardContainerMain{
+    justify-content: flex-start;
+}
+
+.CardContainer{
+    justify-content: center;
+}
+
+.CatalogContainerSecond{
+    margin-left: 7%;
+}
+
+
+@media only screen and (max-width: 600px) {
+   
+}
+
+@media only screen and (max-width: 960px) {
+    .CardContainerMain{
+        justify-content: center !important;
+    }
+
+    .FilterContainer{
+        padding-left: 15% !important;
+        padding-right: 15% !important;
+    }
+
+    .CatalogContainerSecond{
+        margin-left: inherit;
+    }
+  
+}
+
+@media only screen and (max-width: 1280px) {
+   
+}

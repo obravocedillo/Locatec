@@ -25,8 +25,8 @@ class Catalog extends Component{
 
   componentWillMount() {
     //Usar Contexto definido, en este caso static contextType = LocatecContext;
-    const LocatecContext = this.context
-    console.log(LocatecContext.Locatec);
+     //console.log(LocatecContext.Locatec);
+    const LocatecContext = this.context;
     this.getAllObjects();
     this.getAllPlaces();
   }
@@ -64,26 +64,24 @@ class Catalog extends Component{
     const lostObjects= this.state.displayArray.map((result)=>
         result
     );
-    //console.log(lostObjects);
+  
     var objectsDivs = []
-    const places=this.state.placesArray;
-    
     lostObjects.forEach(lostObject => {
-        //console.log(lostObject)
-        const place = places.find(place => place.id == lostObject.lugar_id);
-        console.log(place)
-        objectsDivs.push(
-            <Grid item key={lostObject.id}>
-                <ObjectCard data={lostObject} place={place}>
-                </ObjectCard>
-            </Grid>
-        )
+        const place = this.state.placesArray.find(place => place.id === lostObject.lugar_id);
+        if(place !== undefined && lostObject !== undefined){
+            console.log(place)
+            console.log(lostObject)
+            objectsDivs.push(
+                <Grid item key={lostObject.id} size="3" className="CardContainer">
+                    <ObjectCard data={lostObject} place={place}>
+                    </ObjectCard>
+                </Grid>
+            )
+        }
     });
-    return (
-        objectsDivs
-    )
-    
-  }
+    return objectsDivs;
+
+}
 
     render() {
         this.filterObjectsByName();

@@ -1,0 +1,133 @@
+
+.MainFullGrid{
+    height: 100%;
+}
+
+.MainSearchContainer{
+    justify-content: center;   
+}
+
+.MainTitle{
+    text-align: center;
+    margin-top: 4vh !important;
+    margin-bottom: 2vh !important;
+}
+
+.MainTitle h2{
+    width: 90% !important;
+    margin-left: 5% !important;
+    font-weight: 500;
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem;
+    color: #3f51b5 !important;
+}
+
+.SearchContainerBase{
+    display: flex;
+    align-items: center;
+    width: 90% !important;
+    margin-left: 5% !important;
+    padding-bottom: 6px;
+    padding-top: 6px;
+}
+
+.SearchContainerBase input{
+    text-align: center;
+    color: rgba(0, 0, 0, 0.54);  
+}
+
+
+.SearchContainerInputBase{
+    flex: 1;
+    margin-left: 4%;
+    text-align: center;
+    width: 95%;
+}
+
+.IconSearchButton{
+    border-radius: 0px !important;
+    width: 5%;
+}
+
+.IconSearchButton:hover{
+    background: #fff !important;
+   color : #3f51b5 !important;
+   font-size: 2rem !important;
+}
+
+.Wave{
+    display: block;
+    width: 100%;
+}
+
+.ListContainerMain{
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.ListContainerMain ul{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.ListContainerMain li{
+    padding-left: 0 !important;
+    margin-top: .8rem;
+    margin-bottom: .8rem;
+}
+
+.ListText{
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.DescriptionContainer{
+    justify-content: center;
+}
+
+.DescriptionContainerMain{
+    margin-top: 4rem;
+}
+
+.DetailPart{
+    margin-top:20px !important;
+    margin-bottom:20px !important;
+}
+
+.DetailButton{
+    margin-top:4rem !important;
+}
+
+.PurpleColor{
+    color: #3f51b5 !important;
+}
+
+.NormalColor{
+    color: rgba(0, 0, 0, 0.7) !important;
+    font-size:1.25rem !important;
+}
+
+@media only screen and (max-width: 600px) {
+
+   
+}
+
+@media only screen and (max-width: 960px) {
+    .IconSearchButton{
+        width: 20%;
+    }    
+
+    .MainTitle h2{
+        font-size: 1.3rem !important;
+    }
+
+    .ListContainerMain ul{
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+   
+}
+
+
