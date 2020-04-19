@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AWS from 'aws-sdk';
 import { LocatecContext } from "../Context/LocatecContext";
 import { Grid, TextField, Button, Typography, Snackbar } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
@@ -6,6 +7,8 @@ import axios from "axios";
 
 import NavBar from "./NavBar";
 import "../Style/Home.css";
+
+AWS.config.update({region: 'us-west-1'});
 
 let currentDate = () => {
   let d = new Date();
@@ -26,30 +29,21 @@ export default function RegisterObject() {
   const [openFailureAlertValue, setOpenFailureAlertValue] = useState(false)
 
   const onSubmitClick = () => {
+    let s3Instance = new AWS.S3()
+    console.log(s3Instance);
+    
     console.log("Description-> " + descriptionValue);
     console.log("Date Lost-> " + dateLostValue);
     console.log("Found By-> " + foundByValue);
     axios
       .get(
         "https://b9gaqag9bb.execute-api.us-east-1.amazonaws.com/InsertObject?" +
-          "objetoname=" +
-          descriptionValue +
-          "&" +
-          "objetoimgurl=" +
-          "placeholder.jpg" +
-          "&" +
-          "fechaperdida=" +
-          dateLostValue +
-          "&" +
-          "encontradopor=" +
-          foundByValue +
-          "&" +
-          "lugarid=" +
-          1 +
-          "&" +
-          "statusid=" +
-          14 +
-          "&" +
+          "objetoname=" + descriptionValue + "&" +
+          "objetoimgurl=" + "placeholder.jpg" + "&" +
+          "fechaperdida=" + dateLostValue + "&" +
+          "encontradopor=" + foundByValue + "&" +
+          "lugarid=" + 1 + "&" +
+          "statusid=" + 14 + "&" +
           "fecharecogida="
       )
       .then((res) => {
@@ -88,7 +82,7 @@ export default function RegisterObject() {
 
   return (
     <Grid container>
-      <NavBar />
+      <NavBar active="Register"></NavBar>
       <Grid item xs={12}>
         <Grid
           container
