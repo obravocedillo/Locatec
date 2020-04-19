@@ -40,7 +40,7 @@ class Catalog extends Component{
             <br/>
           </Grid>
           <Grid container className="DescriptionContainer DescriptionContainerMain">
-              <Grid container sm={10} className="DescriptionContainer">
+              <Grid container className="DescriptionContainer">
                 <ProductDescription name={this.props.location.state}>
                 </ProductDescription>
               </Grid>
