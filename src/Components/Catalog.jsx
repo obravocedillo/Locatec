@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { LocatecContext } from '../Context/LocatecContext';
-import '../Style/Home.css'
+import '../Style/Catalog.css'
 import Grid from '@material-ui/core/Grid';
 import NavBar from './NavBar'
 import ObjectCard from './ObjectCard'
@@ -24,8 +24,8 @@ class Catalog extends Component{
 
   componentWillMount() {
     //Usar Contexto definido, en este caso static contextType = LocatecContext;
-    const LocatecContext = this.context
-    console.log(LocatecContext.Locatec);
+     //console.log(LocatecContext.Locatec);
+    const LocatecContext = this.context;
     this.getAllObjects();
     this.getAllPlaces();
   }
@@ -53,29 +53,30 @@ class Catalog extends Component{
   }
 
   mapObjectsInFront(){
-    const lostObjects= this.state.objectsArray.map((result)=>
+    const lostObjects = this.state.objectsArray.map((result)=>
         result
     );
-    //console.log(lostObjects);
+  
     var objectsDivs = []
-    const places=this.state.placesArray;
-    
     lostObjects.forEach(lostObject => {
-        //console.log(lostObject)
-        const place = places.find(place => place.id == lostObject.lugar_id);
-        console.log(place)
-        objectsDivs.push(
-            <Grid item key={lostObject.id}>
-                <ObjectCard data={lostObject} place={place}>
-                </ObjectCard>
-            </Grid>
-        )
+        const place = this.state.placesArray.find(place => place.id === lostObject.lugar_id);
+        if(place !== undefined && lostObject !== undefined){
+            console.log(place)
+            console.log(lostObject)
+            objectsDivs.push(
+                <Grid item key={lostObject.id} size="3" className="CardContainer">
+                    <ObjectCard data={lostObject} place={place}>
+                    </ObjectCard>
+                </Grid>
+            )
+        }
     });
+    return objectsDivs;
+
 }
 
     render() {
         const listObjects = this.mapObjectsInFront()
-        console.log(listObjects)
         if(this.state.objectsArray===[]){
             return(
                 <div></div>
@@ -85,23 +86,21 @@ class Catalog extends Component{
             return (
                 <Grid container>
                 <NavBar active="Catalog"></NavBar>
-                    <Grid container xl={12} spacing={2}>
-                        <Grid item xl={1}>
-                        </Grid>
-                        <Grid item xl={11}>
-                            <Grid container spacing={2} xl={11}>
-                                <Grid container xl={12}>
-                                    <Grid container xl={12}>
-                                        <Grid item>
+                    <Grid container className="CatalogMainContainer">
+                        <Grid item sm={10} className="CatalogContainerSecond">
+                            <Grid container className="CatalogContainerSecond">
+                                <Grid container>
+                                    <Grid container>
+                                        <Grid item sm={12} className="FilterContainer">
                                             <OrderObjects>
                                             </OrderObjects>
                                             <br/>
                                             <br/>
                                         </Grid>
                                     </Grid>
-                                    <Grid container xl={12}>
-                                        <Grid item>
-                                            <Grid container justify="left" spacing={1}>
+                                    <Grid container>
+                                        <Grid item sm={12}>
+                                            <Grid container className="CardContainerMain">
                                                 {listObjects}
                                             </Grid>
                                         </Grid>

@@ -1,3 +1,4 @@
+  
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,7 +21,6 @@ const useStyles = makeStyles({
 
 export default function ObjectCard(props) {
   const classes = useStyles();
-  console.log(props);
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -43,8 +43,10 @@ export default function ObjectCard(props) {
       <CardActions>
         <Link to={{
                   pathname: "/Details",
-                  data: props.data,
-                  place: props.place
+                  state: {
+                    data: props.data,
+                    place: props.place
+                  }
               }}>
           <Button size="small" color="primary">
             Ver más

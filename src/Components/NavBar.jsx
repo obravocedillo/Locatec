@@ -63,7 +63,7 @@ class NavBar extends Component{
                             <Typography variant="h6" className={"NavIcon" + (this.props.active === 'Catalog' ? ' Active' : '')} onClick={()=>this.navigateTo("/Catalog")}>
                                 Catálogo de objetos
                             </Typography>
-                            <Typography variant="h6" className={"NavIcon Last" + (this.props.active === 'Register' ? ' Active' : '')}>
+                            <Typography variant="h6" className={"NavIcon Last" + (this.props.active === 'Register' ? ' Active' : '')} onClick={()=>this.navigateTo("/Register")}>
                                 Registro de objeto
                             </Typography>
                         </div>

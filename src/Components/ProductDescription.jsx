@@ -13,11 +13,11 @@ const useStyles = makeStyles({
   });
 
 export default function ProductDescription(props) {
-    console.log(props)
     const classes=useStyles();
+    console.log(props.name)
     return (
         <Card>
-            <Grid container >
+            <Grid container className="DescriptionContainer">
                 <Grid item xl={6}>
                 <CardMedia
                     className={classes.media}
@@ -25,36 +25,32 @@ export default function ProductDescription(props) {
                     title="Contemplative Reptile"
                 />
                 </Grid>
-                    <Grid container xl={6}>
-                        <Grid container xl={12}>
-                        <Grid item xl={1}>
-                        </Grid>
-                        <Grid container xl={10}>
-                            <Grid container xl={12}>
-                                <Grid item xl={1}>
-                                </Grid>
-                                <Grid item xl={10}>
+                    <Grid container className="DescriptionContainer">
+                        <Grid container className="DescriptionContainer">
+                        <Grid container className="DescriptionContainer">
+                            <Grid container className="DescriptionContainer">
+                                <Grid item sm={10}>
                                     <br/>
                                     <br/>
-                                    <Typography align="center" variant="h3">
-                                    {props.data.name}
+                                    <Typography align="center" variant="h3" className="DetailPart PurpleColor">
+                                    {props.name.data.name}
                                     </Typography>
                                     <br/>
                                     <Divider>
                                     </Divider>
                                     <br/>
-                                    <Typography paragraph={true}>
-                                    Encontrado por: {props.data.encontrado_por}  
+                                    <Typography paragraph={true} className="DetailPart PurpleColor">
+                                    Encontrado por:<span className="NormalColor"> {props.name.data.encontrado_por} </span> 
                                     </Typography>
                                     <br/>
                                     <Divider>
                                     </Divider>
                                     <br/> 
                                     
-                                    <Typography>Lugar: {props.place.name}</Typography>
-                                    <Typography>Fecha: {props.data.fecha_perdida} </Typography>
+                                    <Typography className="DetailPart PurpleColor">Lugar:<span className="NormalColor"> {props.name.place.name}</span> </Typography>
+                                    <Typography className="DetailPart PurpleColor">Fecha:<span className="NormalColor"> {props.name.data.datafecha_perdida}</span> </Typography>
                                     <br/>
-                                    <Button variant="outlined" color="primary" size="large">Reclamar</Button>
+                                    <Button variant="outlined" color="primary" size="large" className="DetailButton">Reclamar</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -1,3 +1,7 @@
 body{
     margin: 0;
 }
+
+.DescriptionContainer{
+    justify-content: center !important; 
+}
