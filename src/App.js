@@ -1,29 +1,20 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { LocatecContext, LocatecData } from './Context/LocatecContext';
-import './Style/Global.css'
-import RegisterObject from './Components/RegisterObject';
+import React, { lazy, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { LocatecContext, LocatecData } from "./Context/LocatecContext";
+import "./Style/Global.css";
 
+const Home = lazy(() => import("./Components/Home"));
+const Catalog = lazy(() => import("./Components/Catalog"));
+const Details = lazy(() => import("./Components/Details"));
+const Register = lazy(() => import("./Components/RegisterObject"))
 
-
-const Home = (
-  lazy(() => (
-    import('./Components/Home')
-  ))
-)
-const Catalog = (
-  lazy(() => (
-    import('./Components/Catalog')
-  ))
-)
-const Details = (
-  lazy(() => (
-    import('./Components/Details')
-  ))
-)
-
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
 
     this.getObjects = () => {
@@ -33,15 +24,15 @@ class App extends React.Component{
 
     this.state = {
       Locatec: LocatecData,
-      getObjects: this.getObjects
-    }
+      getObjects: this.getObjects,
+    };
   }
 
   componentDidMount() {
     this.state.getObjects();
   }
 
-  render(){
+  render() {
     return (
       //Context accesible a todos los componententes hijos, usar static contextType = LocatecContext
       <LocatecContext.Provider value={this.state}>
@@ -50,24 +41,30 @@ class App extends React.Component{
             <Router>
               <Switch>
                 <Route path="/Home">
-                  <Home/>
+                  <Home />
                 </Route>
                 <Route path="/Catalog">
-                  <Catalog/>
+                  <Catalog />
                 </Route>
                 <Route path="/Details">
+<<<<<<< HEAD
                   <Details/>
                 </Route>
                 <Route path="/Register">
                   <RegisterObject />
+=======
+                  <Details />
                 </Route>
-                <Redirect to="/Home"/>
+                <Route path="/Register">
+                  <Register />
+>>>>>>> Bucket
+                </Route>
+                <Redirect to="/Home" />
               </Switch>
             </Router>
           </Suspense>
         </div>
       </LocatecContext.Provider>
-    
     );
   }
 }
