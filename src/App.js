@@ -47,17 +47,10 @@ class App extends React.Component {
                   <Catalog />
                 </Route>
                 <Route path="/Details">
-<<<<<<< HEAD
-                  <Details/>
-                </Route>
-                <Route path="/Register">
-                  <RegisterObject />
-=======
                   <Details />
                 </Route>
                 <Route path="/Register">
                   <Register />
->>>>>>> Bucket
                 </Route>
                 <Redirect to="/Home" />
               </Switch>
