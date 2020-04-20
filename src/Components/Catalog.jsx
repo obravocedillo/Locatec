@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import { LocatecContext } from '../Context/LocatecContext';
 import '../Style/Home.css'
-import Grid from '@material-ui/core/Grid';
 import NavBar from './NavBar'
 import ObjectCard from './ObjectCard'
-import OrderObjects from './OrderObjects'
 import axios from 'axios';
+import { Input, InputAdornment, Grid } from '@material-ui/core';
 
 
 
@@ -18,7 +17,9 @@ class Catalog extends Component{
     super(props);
     this.state = {
         objectsArray: [],
-        placesArray: []
+        displayArray: [],
+        placesArray: [],
+        searchValue: ""
     };
   }
 
@@ -34,6 +35,7 @@ class Catalog extends Component{
     axios.get('https://b9gaqag9bb.execute-api.us-east-1.amazonaws.com/AllObjects')
     .then(response => {
     this.setState({objectsArray: response.data});
+    this.setState({displayArray: response.data});
     console.log(this.state.objectsArray);
     })
     .catch(error => {
@@ -52,8 +54,14 @@ class Catalog extends Component{
     })
   }
 
+
+  filterObjectsByName(){
+      const word = this.state.searchValue;
+      this.state.displayArray= this.state.objectsArray.filter(object => object.name.toLowerCase().includes(word));
+  }
+
   mapObjectsInFront(){
-    const lostObjects= this.state.objectsArray.map((result)=>
+    const lostObjects= this.state.displayArray.map((result)=>
         result
     );
   
@@ -76,8 +84,9 @@ class Catalog extends Component{
 }
 
     render() {
-        const listObjects = this.mapObjectsInFront()
-        console.log(listObjects)
+        this.filterObjectsByName();
+        const listObjects = this.mapObjectsInFront();
+        console.log(listObjects);
         if(this.state.projectsArray===[]){
             return(
                 <div></div>
@@ -86,7 +95,7 @@ class Catalog extends Component{
         else{
             return (
                 <Grid container>
-                    <NavBar></NavBar>
+                    <NavBar active="Catalog"></NavBar>
                     <Grid container xl={12} spacing={2}>
                         <Grid item xl={1}>
                         </Grid>
@@ -95,15 +104,22 @@ class Catalog extends Component{
                                 <Grid container xl={12}>
                                     <Grid container xl={12}>
                                         <Grid item>
-                                            <OrderObjects>
-                                            </OrderObjects>
+                                            <br/>
+                                            <Input 
+                                                fullWidth={true}
+                                                placeholder={"Buscar objeto"}
+                                                defaultValue={this.state.searchValue}
+                                                onChange={event=>{
+                                                    const {value}=event.target;
+                                                    this.setState({searchValue: value})
+                                                }}/>
                                             <br/>
                                             <br/>
                                         </Grid>
                                     </Grid>
                                     <Grid container xl={12}>
                                         <Grid item>
-                                            <Grid container justify="left" spacing={1}>
+                                            <Grid container spacing={1}>
                                                 {listObjects}
                                             </Grid>
                                         </Grid>
