@@ -26,8 +26,8 @@ export default function ObjectCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={require("../Assets/stories.jpg")}
-          title="Contemplative Reptile"
+          image={props.data.img_url}
+          title={props.data.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
