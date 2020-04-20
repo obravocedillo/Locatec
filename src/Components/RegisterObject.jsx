@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import AWS from 'aws-sdk';
-import { LocatecContext } from "../Context/LocatecContext";
-import { Grid, TextField, Button, Typography, Snackbar } from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
+import AWS from "aws-sdk";
+import {
+  Grid,
+  TextField,
+  Button,
+  Typography,
+  Snackbar,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import axios from "axios";
 
 import NavBar from "./NavBar";
 import "../Style/Home.css";
 
-AWS.config.update({region: 'us-west-1'});
+AWS.config.update({ region: "us-west-1" });
 
 let currentDate = () => {
   let d = new Date();
@@ -22,36 +27,63 @@ let currentDate = () => {
 };
 
 export default function RegisterObject() {
+  let s3Instance = new AWS.S3({
+    apiVersion: "2006-03-01",
+    accessKeyId: "AKIASTXONR27XACX6QFL",
+    secretAccessKey: "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",
+  });
+
   const [descriptionValue, setDescriptionValue] = useState("");
   const [dateLostValue, setDateLostValue] = useState(currentDate());
   const [foundByValue, setFoundByValue] = useState("");
-  const [openSuccessAlertValue, setOpenSuccessAlertValue] = useState(false)
-  const [openFailureAlertValue, setOpenFailureAlertValue] = useState(false)
+  const [openSuccessAlertValue, setOpenSuccessAlertValue] = useState(false);
+  const [openFailureAlertValue, setOpenFailureAlertValue] = useState(false);
+  const [fileValue, setFileValue] = useState("");
 
   const onSubmitClick = () => {
-    let s3Instance = new AWS.S3()
-    console.log(s3Instance);
-    
-    console.log("Description-> " + descriptionValue);
-    console.log("Date Lost-> " + dateLostValue);
-    console.log("Found By-> " + foundByValue);
+    if (!fileValue.value) {
+      // Handler error
+      alert("Must put a img");
+      return;
+    }
+
+    let uploadParams = {
+      Bucket: "locatec",
+      Key: Date.now().toString() + "__" + fileValue.value.split("\\").pop(),
+      Body: fileValue.files[0],
+    };
+
+    s3Instance.upload(uploadParams, (err, data) => {
+      if (err) {
+        setOpenFailureAlertValue(true);
+      }
+      if (data) {
+        uploadToDB(data.Location, data.Key);
+      }
+    });
+  };
+
+  const uploadToDB = (img_url, img_key) => {
     axios
-      .get(
-        "https://b9gaqag9bb.execute-api.us-east-1.amazonaws.com/InsertObject?" +
-          "objetoname=" + descriptionValue + "&" +
-          "objetoimgurl=" + "placeholder.jpg" + "&" +
-          "fechaperdida=" + dateLostValue + "&" +
-          "encontradopor=" + foundByValue + "&" +
-          "lugarid=" + 1 + "&" +
-          "statusid=" + 14 + "&" +
-          "fecharecogida="
-      )
+    .get(
+      "https://b9gaqag9bb.execute-api.us-east-1.amazonaws.com/InsertObject?" +
+        "objetoname=" + descriptionValue + "&" +
+        "objetoimgurl=" + img_url + "&" +
+        "fechaperdida=" + dateLostValue + "&" +
+        "encontradopor=" + foundByValue + "&" +
+        "lugarid=" + 1 + "&" +
+        "statusid=" + 14 + "&" +
+        "fecharecogida="
+    )
       .then((res) => {
-        console.log(res);
         setOpenSuccessAlertValue(true);
       })
       .catch((err) => {
-        console.log(err);
+        var params = {
+          Bucket: "locatec",
+          Key: img_key,
+        };
+        s3Instance.deleteObject(params, () => {});
         setOpenFailureAlertValue(true);
       });
   };
@@ -72,7 +104,7 @@ export default function RegisterObject() {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -108,7 +140,13 @@ export default function RegisterObject() {
 
             <br></br>
             <Grid item xs={12}>
-              <input type="file" />
+              <input
+                type="file"
+                ref={(ref) => {
+                  setFileValue(ref);
+                }}
+                accept="image/png, image/jpeg, image/jpg"
+              />
             </Grid>
 
             <br></br>
@@ -150,14 +188,22 @@ export default function RegisterObject() {
           </form>
         </Grid>
       </Grid>
-      <Snackbar open={openSuccessAlertValue} autoHideDuration={4000} onClose={handleClose}>
-        <Alert  severity="success" onClose={handleClose}>
+      <Snackbar
+        open={openSuccessAlertValue}
+        autoHideDuration={4000}
+        onClose={handleClose}
+      >
+        <Alert severity="success" onClose={handleClose}>
           Record uploaded!
         </Alert>
       </Snackbar>
 
-      <Snackbar open={openFailureAlertValue} autoHideDuration={4000} onClose={handleClose}>
-        <Alert  severity="error" onClose={handleClose}>
+      <Snackbar
+        open={openFailureAlertValue}
+        autoHideDuration={4000}
+        onClose={handleClose}
+      >
+        <Alert severity="error" onClose={handleClose}>
           Couldn't upload record, try again!
         </Alert>
       </Snackbar>
