@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AWS from "aws-sdk";
+import '../Style/Home.css'
 import {
   Grid,
   TextField,
@@ -124,17 +125,18 @@ export default function RegisterObject() {
           spacing={2}
         >
           <Grid item xs={12}>
-            <Typography variant="h5" align="center">
-              Register new lost product
+            <Typography variant="h5" align="center" className="PurpleTextHeader">
+              Registrar objeto perdido
             </Typography>
           </Grid>
-          <form noValidate autoComplete="off">
+          <form noValidate autoComplete="off" className="RegisterForm">
             <Grid item xs={12}>
               <TextField
                 id="standard-basic"
-                label="Description"
+                label="Descripción"
                 value={descriptionValue}
                 onChange={handleDescriptionChange}
+                className="RegisterInput RegisterMargin"
               />
             </Grid>
 
@@ -146,6 +148,7 @@ export default function RegisterObject() {
                   setFileValue(ref);
                 }}
                 accept="image/png, image/jpeg, image/jpg"
+                className="RegisterInput RegisterMargin"
               />
             </Grid>
 
@@ -153,8 +156,9 @@ export default function RegisterObject() {
             <Grid item xs={12}>
               <TextField
                 id="date"
-                label="Date of lost"
+                label="Fecha de perdida"
                 type="date"
+                className="RegisterInput RegisterMargin"
                 value={dateLostValue}
                 onChange={handleDateLostChange}
                 InputLabelProps={{
@@ -167,7 +171,8 @@ export default function RegisterObject() {
             <Grid item xs={12}>
               <TextField
                 id="standard-basic"
-                label="Found by:"
+                label="Fecha encontrado:"
+                className="RegisterInput RegisterMargin"
                 value={foundByValue}
                 onChange={handleFoundByChange}
               />
@@ -177,12 +182,13 @@ export default function RegisterObject() {
             <Grid item xs={12}>
               <Button
                 variant="outlined"
+                className="RegisterInput RegisterButtonMargin"
                 type="button"
                 onClick={() => {
                   onSubmitClick();
                 }}
               >
-                Create record
+                Registrar objeto
               </Button>
             </Grid>
           </form>
@@ -194,7 +200,7 @@ export default function RegisterObject() {
         onClose={handleClose}
       >
         <Alert severity="success" onClose={handleClose}>
-          Record uploaded!
+          Objeto Registrado!
         </Alert>
       </Snackbar>
 
@@ -204,7 +210,7 @@ export default function RegisterObject() {
         onClose={handleClose}
       >
         <Alert severity="error" onClose={handleClose}>
-          Couldn't upload record, try again!
+          Error intentelo más tarde!
         </Alert>
       </Snackbar>
     </Grid>

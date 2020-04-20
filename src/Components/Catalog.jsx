@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { LocatecContext } from '../Context/LocatecContext';
-import '../Style/Home.css'
+import '../Style/Catalog.css'
 import NavBar from './NavBar'
 import ObjectCard from './ObjectCard'
 import axios from 'axios';
 import { Input, InputAdornment, Grid } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -29,6 +30,10 @@ class Catalog extends Component{
     const LocatecContext = this.context;
     this.getAllObjects();
     this.getAllPlaces();
+    if(this.props.location.state){
+        this.setState({searchValue: this.props.location.state.search})
+        this.filterObjectsByName();
+    }
   }
 
   getAllObjects(){
@@ -95,19 +100,17 @@ class Catalog extends Component{
         else{
             return (
                 <Grid container>
-                    <NavBar active="Catalog"></NavBar>
-                    <Grid container xl={12} spacing={2}>
-                        <Grid item xl={1}>
-                        </Grid>
-                        <Grid item xl={11}>
-                            <Grid container spacing={2} xl={11}>
-                                <Grid container xl={12}>
-                                    <Grid container xl={12}>
-                                        <Grid item>
+                <NavBar active="Catalog"></NavBar>
+                    <Grid container className="CatalogMainContainer">
+                        <Grid item sm={10} className="CatalogContainerSecond">
+                            <Grid container className="CatalogContainerSecond">
+                                <Grid container>
+                                    <Grid container>
+                                        <Grid item sm={12} className="FilterContainer">
                                             <br/>
                                             <Input 
-                                                fullWidth={true}
-                                                placeholder={"Buscar objeto"}
+                                                className="FilterInput"
+                                                placeholder={"¿Que estas bsucando?"}
                                                 defaultValue={this.state.searchValue}
                                                 onChange={event=>{
                                                     const {value}=event.target;
@@ -117,9 +120,9 @@ class Catalog extends Component{
                                             <br/>
                                         </Grid>
                                     </Grid>
-                                    <Grid container xl={12}>
-                                        <Grid item>
-                                            <Grid container spacing={1}>
+                                    <Grid container>
+                                        <Grid item sm={12}>
+                                            <Grid container className="CardContainerMain">
                                                 {listObjects}
                                             </Grid>
                                         </Grid>
@@ -135,4 +138,7 @@ class Catalog extends Component{
     }
 }
 
-export default Catalog;
+
+export default withRouter(Catalog)
+
+

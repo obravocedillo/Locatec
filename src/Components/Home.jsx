@@ -15,6 +15,7 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import '../Style/Home.css'
 import Grid from '@material-ui/core/Grid';
 import NavBar from './NavBar'
+import { withRouter } from "react-router-dom";
 
 
 class Home extends Component{
@@ -24,7 +25,7 @@ class Home extends Component{
   constructor(props){
     super(props);
     this.state = {
-      
+      searchValue:''
     };
   }
 
@@ -32,6 +33,15 @@ class Home extends Component{
     //Usar Contexto definido, en este caso static contextType = LocatecContext;
     const LocatecContext = this.context
     console.log(LocatecContext.Locatec);
+  }
+
+  openSearch = () => {
+    this.props.history.push({
+      pathname: "/Catalog",
+      state: {
+        search:this.state.searchValue
+      }
+    })
   }
 
   render() {
@@ -48,9 +58,13 @@ class Home extends Component{
                 <InputBase
                   className="SearchContainerInputBase"
                   placeholder="¿Qué estas buscando?"
+                  onChange={event=>{
+                    const {value}=event.target;
+                    this.setState({searchValue: value})
+                  }}
                 />
-                <IconButton type="submit" aria-label="search" className="IconSearchButton">
-                  <SearchIcon />
+                <IconButton type="submit" aria-label="search" className="IconSearchButton" onClick={this.openSearch} >
+                  <SearchIcon/>
                 </IconButton>
               </Paper>
             </Grid>
@@ -93,4 +107,5 @@ class Home extends Component{
   }
 }
 
-export default Home;
+export default withRouter(Home);
+

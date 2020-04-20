@@ -10,10 +10,16 @@
 
 .FilterContainer{
     padding-left: 24px;
+    
+}
+
+.FilterInput{
+    width: 84%;
 }
 
 .CardContainerMain{
     justify-content: flex-start;
+    
 }
 
 .CardContainer{
@@ -21,7 +27,7 @@
 }
 
 .CatalogContainerSecond{
-    margin-left: 7%;
+    margin-left: 5%;
 }
 
 
@@ -35,8 +41,11 @@
     }
 
     .FilterContainer{
-        padding-left: 15% !important;
-        padding-right: 15% !important;
+        padding-left: 0% !important;
+        padding-right: 0% !important;
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 
     .CatalogContainerSecond{

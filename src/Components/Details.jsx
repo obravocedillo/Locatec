@@ -22,7 +22,6 @@ class Catalog extends Component{
   componentDidMount() {
     //Usar Contexto definido, en este caso static contextType = LocatecContext;
     const LocatecContext = this.context
-    console.log(this.props.location);
     this.state.Details=this.props.location.state
 
   }
