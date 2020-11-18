@@ -1,3 +1,4 @@
+Description: Project for findign lost objects inside the school, is hosted on aws using buckets. We use lamnda functions as the backend in our application
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
